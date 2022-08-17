@@ -10,11 +10,17 @@ public abstract class Personal implements Packable {
     private double length;
 
     public Personal(String owner) {
+        if (owner == null || owner.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
         this.owner = owner;
 
     }
 
     public Personal(String owner, double width, double height, double length) {
+        if (owner == null || owner.isEmpty() || width < 0 || height < 0 || length < 0) {
+            throw new IllegalArgumentException();
+        }
         this.owner = owner;
         this.width = width;
         this.height = height;
@@ -44,5 +50,10 @@ public abstract class Personal implements Packable {
     @Override
     public double getLength() {
         return length;
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + " (" + owner + ")";
     }
 }

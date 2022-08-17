@@ -1,6 +1,6 @@
 package mms.exceptions;
 
-public class PackingOrderException extends PackingException{
+public class PackingOrderException extends PackingException {
 
     public PackingOrderException() {}
 

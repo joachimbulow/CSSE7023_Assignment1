@@ -26,7 +26,7 @@ public class MovingTruck extends Storage {
 
     @Override
     public void pack(Packable item) throws StorageFullException, BadItemException {
-        if (exceedsStorage(getWidth(), getHeight(), getLength(), getElements(), item)) {
+        if (exceedsStorage(this, item)) {
             throw new StorageFullException();
         }
 
@@ -34,6 +34,7 @@ public class MovingTruck extends Storage {
         if (hasFurniture && !item.getClass().equals(Furniture.class)){
             throw new BadItemException();
         }
+        getElements().add(item);
     }
 
     public Packable unpack() {

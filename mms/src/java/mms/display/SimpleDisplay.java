@@ -125,6 +125,7 @@ public class SimpleDisplay {
         }
 
         System.out.println("After packing:");
+        System.out.println(truck.toString());
         System.out.println(truck.toString(0));
         // remove some items
         for (int i = 0; i < 3; i++) {
@@ -134,6 +135,7 @@ public class SimpleDisplay {
 
         System.out.println("After unpacking:");
         System.out.println(truck.toString(0));
+        System.out.println(truck.toString());
 
 
     }

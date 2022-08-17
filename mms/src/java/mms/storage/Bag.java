@@ -1,5 +1,8 @@
 package mms.storage;
 
+import mms.exceptions.BadItemException;
+import mms.exceptions.StorageFullException;
+import mms.personal.Personal;
 import mms.utility.Packable;
 import mms.utility.Size;
 
@@ -19,7 +22,13 @@ public class Bag extends Storage {
         return 1;
     }
 
-    public void pack(Packable item) {
+    public void pack(Packable item) throws StorageFullException, BadItemException {
+        if (exceedsStorage(this, item)) {
+            throw new StorageFullException();
+        }
+        if (!(item instanceof Personal)) {
+            throw new BadItemException();
+        }
         getElements().add(item);
     }
 }

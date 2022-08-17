@@ -6,7 +6,10 @@ public class Book extends Personal {
     private boolean isFiction;
 
     public Book(String owner, String title, boolean isFiction){
-        super(owner);
+        super(owner, 20, 20, 5);
+        if (title == null || title.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
         this.title = title;
         this.isFiction = isFiction;
     }

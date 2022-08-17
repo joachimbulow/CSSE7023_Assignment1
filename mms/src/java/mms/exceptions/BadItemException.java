@@ -1,6 +1,6 @@
 package mms.exceptions;
 
-public class BadItemException extends PackingException{
+public class BadItemException extends PackingException {
 
     public BadItemException() {}
 

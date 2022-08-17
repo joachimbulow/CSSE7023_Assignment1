@@ -23,13 +23,13 @@ public class Clothes extends Personal {
 
     @Override
     public String toString() {
-        return "Clothes(" + getOwner() + ") (" + size.name() + ", " + type.name() + ")";
+        return "Clothes (" + getOwner() + ") (" + size.name() + ", " + type.name() + ")";
     }
 
 
     // Static utility functions
 
-    public static double getWidthFromSize(Size size) {
+    private static double getWidthFromSize(Size size) {
         switch (size){
             case SMALL:
                 return 40;
@@ -41,7 +41,7 @@ public class Clothes extends Personal {
                 return 0;
         }
     }
-    public static double getHeightFromSize(Size size) {
+    private static double getHeightFromSize(Size size) {
         switch (size){
             case SMALL:
                 return 65;
@@ -54,7 +54,7 @@ public class Clothes extends Personal {
         }
     }
 
-    public static double getLengthFromSize(Size size) {
+    private static double getLengthFromSize(Size size) {
         switch (size){
             case SMALL:
                 return 10;

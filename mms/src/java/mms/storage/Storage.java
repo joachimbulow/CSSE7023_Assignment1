@@ -6,6 +6,7 @@ import mms.utility.Packable;
 import mms.utility.Size;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,6 +23,7 @@ public abstract class Storage {
         this.height = height;
         this.length = length;
         this.size = Size.MEDIUM;
+        this.elements = new ArrayList<>();
     }
 
     public Storage(double width, double height, double length, Size size) {
@@ -29,6 +31,8 @@ public abstract class Storage {
         this.height = height;
         this.length = length;
         this.size = size;
+        this.elements = new ArrayList<>();
+
     }
 
     public double getWidth() {
@@ -57,24 +61,27 @@ public abstract class Storage {
 
     public void pack(Packable item) throws PackingException {
 
-        if (exceedsStorage(getWidth(), getHeight(), getLength(), getElements(), item)) {
+        if (exceedsStorage(this, item)) {
             throw new StorageFullException();
         }
         this.elements.add(item);
     }
 
-    public static boolean exceedsStorage(double width, double height, double length, List<Packable> elements, Packable item) {
-        double packedWidth = elements.stream().map(e -> e.getWidth()).reduce(0.0, (total, wid) -> total + wid);
-        double packedHeight = elements.stream().map(e -> e.getHeight()).reduce(0.0, (total, hei) -> total + hei);
-        double packedLength = elements.stream().map(e -> e.getLength()).reduce(0.0, (total, len) -> total + len);
+    static protected boolean exceedsStorage(Storage storage, Packable item) {
+        if (storage.getElements().size() == storage.getCapacity()) {
+            return true;
+        }
+        double packedWidth = storage.getElements().stream().map(e -> e.getWidth()).reduce(0.0, (total, wid) -> total + wid);
+        double packedHeight = storage.getElements().stream().map(e -> e.getHeight()).reduce(0.0, (total, hei) -> total + hei);
+        double packedLength = storage.getElements().stream().map(e -> e.getLength()).reduce(0.0, (total, len) -> total + len);
         int exceeding = 0;
-        if (packedWidth + item.getWidth() > width) {
+        if (packedWidth + item.getWidth() > storage.getWidth()) {
             exceeding++;
         }
-        if (packedHeight + item.getHeight() > height) {
+        if (packedHeight + item.getHeight() > storage.getHeight()) {
             exceeding++;
         }
-        if (packedLength + item.getLength() > length) {
+        if (packedLength + item.getLength() > storage.length) {
             exceeding++;
         }
         return exceeding > 1;
@@ -94,7 +101,7 @@ public abstract class Storage {
     protected abstract int getMultiplier();
 
     //Static utility method for translating size to corresponding multiplier
-    public static int getSizeMultiplier(Size size) {
+    private static int getSizeMultiplier(Size size) {
        switch (size) {
            case SMALL:
                return 3;
@@ -114,7 +121,7 @@ public abstract class Storage {
     @Override
     public String toString() {
         DecimalFormat df = new DecimalFormat("0.00");
-        return getClass().getSimpleName() + " (" + df.format(width) + ", " + df.format(height) + ", " + df.format(length) + ")" + size.name();
+        return getClass().getSimpleName() + " (" + df.format(width) + ", " + df.format(height) + ", " + df.format(length) + ") " + size.name();
     }
 
     public String toString(int level) {
@@ -124,12 +131,13 @@ public abstract class Storage {
         for (int i = 1; i <= level; i++) {
             sb.append("\t");
         }
-        sb.append(getClass().getSimpleName() + " (" + df.format(width) + ", " + df.format(height) + ", " + df.format(length) + ")" + size.name());
+        sb.append(getClass().getSimpleName() + " (" + df.format(width) + ", " + df.format(height) + ", " + df.format(length) + ") " + size.name());
         sb.append(System.lineSeparator());
         //Items
         for (Packable p : elements) {
             for (int i = 1; i <= level + 1; i++) {
                 sb.append("\t");
+                sb.append(p.toString());
             }
             sb.append(System.lineSeparator());
         }

@@ -10,7 +10,7 @@ public class Furniture implements Packable {
         this.type = type;
     }
 
-    FurnitureType getType() {
+    public FurnitureType getType() {
         return type;
     }
 
@@ -33,4 +33,5 @@ public class Furniture implements Packable {
     public String toString() {
         return "Furniture (" + type.name() + ")";
     }
+
 }

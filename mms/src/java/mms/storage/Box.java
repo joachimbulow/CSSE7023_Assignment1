@@ -1,9 +1,12 @@
 package mms.storage;
 
+import mms.furniture.Furniture;
+import mms.furniture.FurnitureType;
 import mms.personal.Laptop;
 import mms.utility.Packable;
 import mms.utility.Size;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class Box extends Storage implements Packable{
@@ -31,11 +34,17 @@ public class Box extends Storage implements Packable{
 
     @Override
     public String toString() {
-        return "Box (" + getWidth() + ", " + getHeight() + ", " + getLength() + ")" + getSize().name() + " - " + comment;
+        return "Box (" + getWidth() + ", " + getHeight() + ", " + getLength() + ") " + getSize().name() + " - " + comment;
     }
 
     public boolean isFragile() {
-        return getElements().stream().filter(i -> i.getClass().equals(Laptop.class)).collect(Collectors.toList()).size() > 0;
+        List<Packable> televisions = getElements().stream().filter(i -> i instanceof Furniture).collect(Collectors.toList());
+        for (Packable tv : televisions) {
+            if (((Furniture)tv).getType().equals(FurnitureType.TELEVISION)){
+                return true;
+            }
+        }
+        return getElements().stream().filter(i -> i instanceof Laptop).collect(Collectors.toList()).size() > 0;
     }
 
     public void pack(Packable item) {
