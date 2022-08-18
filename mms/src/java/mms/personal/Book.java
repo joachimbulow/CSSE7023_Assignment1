@@ -20,6 +20,7 @@ public class Book extends Personal {
      * @param owner the owner of the book
      * @param title the title of the book
      * @param isFiction whether the book is fiction or not
+     * @throws IllegalArgumentException if title is null or empty
      */
     public Book(String owner, String title, boolean isFiction) {
         super(owner, 20, 20, 5);
@@ -40,7 +41,7 @@ public class Book extends Personal {
 
     @Override
     public String toString() {
-        return "Book (" + getOwner() + ") Title: " + title + "(" + isFiction + ")";
+        return "Book (" + getOwner() + ") Title: " + title + " (" + (isFiction ?  "Fiction" : "Non-Fiction" ) + ")";
     }
 
 

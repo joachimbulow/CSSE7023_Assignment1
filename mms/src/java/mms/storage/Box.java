@@ -26,9 +26,13 @@ public class Box extends Storage implements Packable {
      * @param height the height of the box
      * @param length the length of the boc
      * @param comment the comment written on the box
+     * @throws IllegalArgumentException if comment is null
      */
     public Box(double width, double height, double length, String comment) {
         super(width, height, length);
+        if (comment == null) {
+            throw new IllegalArgumentException();
+        }
         this.comment = comment;
     }
 
@@ -39,9 +43,13 @@ public class Box extends Storage implements Packable {
      * @param length the length of the boc
      * @param size the size of the box
      * @param comment the comment written on the box
+     * @throws IllegalArgumentException if comment is null
      */
     public Box(double width, double height, double length, Size size, String comment) {
         super(width, height, length, size);
+        if (comment == null) {
+            throw new IllegalArgumentException();
+        }
         this.comment = comment;
     }
 

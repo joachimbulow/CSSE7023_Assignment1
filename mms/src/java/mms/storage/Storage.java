@@ -228,13 +228,15 @@ public abstract class Storage {
         }
         StringBuilder sb = new StringBuilder();
         DecimalFormat df = new DecimalFormat("0.00");
-        // Header
+
+        // Header section of storage item
         for (int i = 1; i <= level; i++) {
             sb.append("\t");
         }
         sb.append(getClass().getSimpleName() + " (" + df.format(width) + ", " + df.format(height)
                 + ", " + df.format(length) + ") " + size.name());
         sb.append(System.lineSeparator());
+
         //Items
         for (Packable p : elements) {
             if (p instanceof Box) {

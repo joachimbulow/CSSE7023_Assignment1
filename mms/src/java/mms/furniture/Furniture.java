@@ -30,22 +30,22 @@ public class Furniture implements Packable {
 
     @Override
     public double getHeight() {
-        return type.height;
+        return type.height * 100;
     }
 
     @Override
     public double getWidth() {
-        return type.width;
+        return type.width * 100 ;
     }
 
     @Override
     public double getLength() {
-        return type.length;
+        return type.length * 100;
     }
 
     @Override
     public double getVolume() {
-        return getWidth() * getHeight() * getLength();
+        return type.width * type.height * type.length * 1000000;
     }
 
     @Override

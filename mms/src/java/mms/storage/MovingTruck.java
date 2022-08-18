@@ -20,9 +20,13 @@ public class MovingTruck extends Storage {
      * @param width the width of the box
      * @param height the height of the box
      * @param length the length of the boc
+     * @throws IllegalArgumentException when length is less than 1500
      */
     public MovingTruck(double width, double height, double length) {
         super(width, height, length);
+        if (length < 1500) {
+            throw new IllegalArgumentException();
+        }
     }
 
     /**
@@ -34,6 +38,9 @@ public class MovingTruck extends Storage {
      */
     public MovingTruck(double width, double height, double length, Size size) {
         super(width, height, length, size);
+        if (length < 1500) {
+            throw new IllegalArgumentException();
+        }
     }
 
     @Override
@@ -46,19 +53,21 @@ public class MovingTruck extends Storage {
         boolean hasFurniture = getElements().stream()
                 .filter(i -> i instanceof Furniture).collect(Collectors.toList()).size() > 0;
 
+        // If any furniture is already packed, nothing other than furniture may be packed
         if (hasFurniture && !item.getClass().equals(Furniture.class)) {
             throw new BadItemException();
         }
 
         double packedLength = getElements().stream()
                 .map(e -> e.getLength()).reduce(0.0, (total, len) -> total + len);
-        if (packedLength + item.getLength() > getLength() - 1500) {
+        if (packedLength + item.getLength() > getLength()) {
             throw new StorageFullException();
         }
 
         super.pack(item);
     }
 
+    //TODO fix this
     @Override
     public Packable unpack() {
         List<Packable> furniture = getElements().stream()
@@ -75,12 +84,17 @@ public class MovingTruck extends Storage {
         return null;
     }
 
+    @Override
+    public double getLength() {
+        return super.getLength() - 1500;
+    }
+
     /**
      * Calculates volume of truck
      * @return the volume of truck
      */
     public double getVolume() {
-        return getWidth() * getHeight() * (getLength() - 1500);
+        return getWidth() * getHeight() * getLength();
     }
 
     @Override
