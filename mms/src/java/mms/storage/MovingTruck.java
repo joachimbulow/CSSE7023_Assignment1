@@ -99,6 +99,6 @@ public class MovingTruck extends Storage {
 
     @Override
     public String toString() {
-        return "MovingTruck(" + getElements().size() + "/" + getCapacity() + ")";
+        return "MovingTruck (" + getElements().size() + "/" + getCapacity() + ")";
     }
 }

@@ -9,11 +9,11 @@ public enum Size {
      */
     LARGE,
     /**
-     * Large size
+     * Medium size
      */
     MEDIUM,
     /**
-     * Large size
+     * Small size
      */
     SMALL
 }

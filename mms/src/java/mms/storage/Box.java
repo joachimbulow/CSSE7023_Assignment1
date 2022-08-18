@@ -7,6 +7,7 @@ import mms.personal.Laptop;
 import mms.utility.Packable;
 import mms.utility.Size;
 
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -68,9 +69,11 @@ public class Box extends Storage implements Packable {
 
     @Override
     public String toString() {
-        return "Box (" + getWidth() + ", " + getHeight() + ", " + getLength() + ") "
+        DecimalFormat df = new DecimalFormat("0.00");
+        return "Box (" + df.format(getWidth()) + ", " + df.format(getHeight()) + ", "
+                + df.format(getLength()) + ") "
                 + getSize().name() + " - " + (comment.isEmpty() ? "\0" : comment)
-                + (isFragile() ? "FRAGILE" : "");
+                + (isFragile() ? " FRAGILE" : "");
     }
 
     /**

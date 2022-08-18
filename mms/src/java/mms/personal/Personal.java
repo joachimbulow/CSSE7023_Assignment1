@@ -37,6 +37,9 @@ public abstract class Personal implements Packable {
         if (owner == null || owner.isEmpty()) {
             throw new IllegalArgumentException();
         }
+        this.width = 0;
+        this.height = 0;
+        this.length = 0;
         this.owner = owner;
 
     }
@@ -77,6 +80,10 @@ public abstract class Personal implements Packable {
      */
     public String getOwner() {
         return owner;
+    }
+
+    public static int getBaseWeight() {
+        return 250;
     }
 
     @Override

@@ -7,6 +7,9 @@ import mms.personal.Personal;
 import mms.utility.Packable;
 import mms.utility.Size;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  * A special type of storage that can hold personal items
  */
@@ -48,6 +51,12 @@ public class Bag extends Storage implements Packable {
         if (!(item instanceof Personal)) {
             throw new BadItemException();
         }
+
+        List<Packable> personalElements = getElements().stream().filter(ele -> ele instanceof Personal).collect(Collectors.toList());
+        if (personalElements.size() * Personal.getBaseWeight() > 1500) {
+            throw new StorageFullException();
+        }
+
         super.pack(item);
     }
 

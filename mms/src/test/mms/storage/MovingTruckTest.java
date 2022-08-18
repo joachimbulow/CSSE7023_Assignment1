@@ -83,21 +83,38 @@ public class MovingTruckTest {
 
     @Test
     public void getMultiplier() {
-    }
-
-    @Test
-    public void pack() {
+        MovingTruck mt = new MovingTruck(10000, 10000, 10000, Size.SMALL);
+        assertEquals(mt.getMultiplier(), 4);
     }
 
     @Test
     public void unpack() {
+
     }
 
     @Test
     public void getVolume() {
+        MovingTruck mt = new MovingTruck(10000, 10000, 10000, Size.SMALL);
+        assertTrue(mt.getVolume() == mt.getHeight() * mt.getWidth() * mt.getLength());
     }
 
     @Test
-    public void testToString() {
+    public void testToStringWithoutItems() {
+        MovingTruck mt = new MovingTruck(10000, 10000, 10000, Size.SMALL);
+        assertTrue(mt.toString().equals("MovingTruck (0/" + mt.getCapacity() + ")"));
+    }
+
+    @Test
+    public void testToStringWithItems() {
+        MovingTruck mt = new MovingTruck(10000, 10000, 10000, Size.SMALL);
+        Laptop test = new Laptop("Jones", 3);
+        try {
+            mt.pack(test);
+            String gg = mt.toString();
+            assertTrue(mt.toString().equals("MovingTruck (1/" + mt.getCapacity() + ")"));
+        }
+        catch (Exception e) {
+            fail();
+        }
     }
 }
