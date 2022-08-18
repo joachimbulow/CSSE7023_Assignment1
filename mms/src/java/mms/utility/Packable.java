@@ -1,7 +1,31 @@
 package mms.utility;
 
+/**
+ * Interface for packable items
+ */
 public interface Packable {
-    abstract double getHeight();
-    abstract double getWidth();
-    abstract double getLength();
+
+    /**
+     * Getting height of item
+     * @return the height of the item
+     */
+    double getHeight();
+
+    /**
+     * Getting width of item
+     * @return the width of the item
+     */
+    double getWidth();
+
+    /**
+     * Getting length of item
+     * @return the length of the item
+     */
+    double getLength();
+
+    /**
+     * Getting volume of item
+     * @return the volume of the item
+     */
+    double getVolume();
 }

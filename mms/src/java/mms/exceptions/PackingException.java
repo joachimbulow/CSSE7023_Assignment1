@@ -1,10 +1,20 @@
 package mms.exceptions;
 
-public class PackingException extends Exception{
+/**
+ * Exception class for generic packing exceptions
+ */
+public class PackingException extends Exception {
 
+    /**
+     * No-arg constructor
+     */
     public PackingException() {}
 
-    public PackingException(String message){
+    /**
+     * Message constructor
+     * @param message custom message to be displayed
+     */
+    public PackingException(String message) {
         super(message);
     }
 }

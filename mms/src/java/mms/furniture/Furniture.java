@@ -2,14 +2,28 @@ package mms.furniture;
 
 import mms.utility.Packable;
 
+/**
+ * Furniture class to identify when furniture is packed
+ */
 public class Furniture implements Packable {
 
-    private FurnitureType type;
+    /**
+     * Type of the furniture
+     */
+    private final FurnitureType type;
 
+    /**
+     * Constructor
+     * @param type - the type of the furniture
+     */
     public Furniture(FurnitureType type) {
         this.type = type;
     }
 
+    /**
+     * getter for the furniture type
+     * @return the type of the furniture instance
+     */
     public FurnitureType getType() {
         return type;
     }
@@ -27,6 +41,11 @@ public class Furniture implements Packable {
     @Override
     public double getLength() {
         return type.length;
+    }
+
+    @Override
+    public double getVolume() {
+        return getWidth() * getHeight() * getLength();
     }
 
     @Override

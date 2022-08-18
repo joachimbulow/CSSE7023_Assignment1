@@ -91,6 +91,8 @@ public class SimpleDisplay {
             storage3.pack(personal2);
             storage3.pack(personal3);
             truck.pack((Packable) storage1);
+            truck.pack((Packable) storage2);
+            truck.pack((Packable) storage3);
         } catch (PackingException | ClassCastException e) {
             e.printStackTrace();
         }
@@ -125,7 +127,7 @@ public class SimpleDisplay {
         }
 
         System.out.println("After packing:");
-        System.out.println(truck.toString());
+        System.out.println(truck);
         System.out.println(truck.toString(0));
         // remove some items
         for (int i = 0; i < 3; i++) {
@@ -135,7 +137,7 @@ public class SimpleDisplay {
 
         System.out.println("After unpacking:");
         System.out.println(truck.toString(0));
-        System.out.println(truck.toString());
+        System.out.println(truck);
 
 
     }

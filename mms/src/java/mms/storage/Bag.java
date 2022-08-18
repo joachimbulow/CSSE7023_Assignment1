@@ -1,17 +1,34 @@
 package mms.storage;
 
 import mms.exceptions.BadItemException;
+import mms.exceptions.PackingException;
 import mms.exceptions.StorageFullException;
 import mms.personal.Personal;
 import mms.utility.Packable;
 import mms.utility.Size;
 
-public class Bag extends Storage {
+/**
+ * A special type of storage that can hold personal items
+ */
+public class Bag extends Storage implements Packable {
 
+    /**
+     * Constructor with dimensions
+     * @param width width of the bag
+     * @param height height of the bag
+     * @param length length of the bag
+     */
     public Bag(double width, double height, double length) {
         super(width, height, length);
     }
 
+    /**
+     * Constructor with dimensions and size
+     * @param width width of the bag
+     * @param height height of the bag
+     * @param length length of the bag
+     * @param size size of the bag
+     */
     public Bag(double width, double height, double length, Size size) {
         super(width, height, length, size);
     }
@@ -22,13 +39,20 @@ public class Bag extends Storage {
         return 1;
     }
 
-    public void pack(Packable item) throws StorageFullException, BadItemException {
-        if (exceedsStorage(this, item)) {
-            throw new StorageFullException();
-        }
+    /**
+     * Method for packing an item to the bag
+     * @param item to pack
+     * @throws BadItemException when packing non personal item
+     */
+    public void pack(Packable item) throws PackingException {
         if (!(item instanceof Personal)) {
             throw new BadItemException();
         }
-        getElements().add(item);
+        super.pack(item);
+    }
+
+    @Override
+    public double getVolume() {
+        return getWidth() * getHeight() * getLength();
     }
 }
