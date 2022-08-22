@@ -115,8 +115,8 @@ public class MovingTruckTest {
 
     @Test
     public void getVolume() {
-        MovingTruck mt = new MovingTruck(10000, 10000, 10000, Size.SMALL);
-        assertTrue(mt.getVolume() == mt.getHeight() * mt.getWidth() * mt.getLength());
+        MovingTruck mt = new MovingTruck(1000, 1000, 1501, Size.SMALL);
+        assertEquals(mt.getVolume(), 1000000, 0.1);
     }
 
     @Test

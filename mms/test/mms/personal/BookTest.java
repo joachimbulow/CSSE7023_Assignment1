@@ -46,6 +46,7 @@ public class BookTest {
     @Test
     public void getVolume() {
         Book book = new Book("Test", "TestBook", true);
-        assertTrue(book.getVolume() == book.getHeight() * book.getWidth() * book.getLength());
+        assertEquals(book.getVolume(), 20 * 20 * 5, 0.1);
+
     }
 }
