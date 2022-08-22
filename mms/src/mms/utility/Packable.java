@@ -27,5 +27,7 @@ public interface Packable {
      * Getting volume of item
      * @return the volume of the item
      */
-    public abstract double getVolume();
+    default double getVolume() {
+        return getWidth() * getHeight() * getLength();
+    }
 }
