@@ -1,6 +1,5 @@
 package mms.storage;
 
-import mms.exceptions.BadItemException;
 import mms.exceptions.PackingException;
 import mms.exceptions.PackingOrderException;
 import mms.exceptions.StorageFullException;

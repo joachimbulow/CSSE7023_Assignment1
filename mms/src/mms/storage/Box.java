@@ -1,6 +1,5 @@
 package mms.storage;
 
-import mms.exceptions.PackingException;
 import mms.furniture.Furniture;
 import mms.furniture.FurnitureType;
 import mms.personal.Laptop;

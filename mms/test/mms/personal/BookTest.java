@@ -1,26 +1,20 @@
 package mms.personal;
 
-import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.Timeout;
 
 import static org.junit.Assert.*;
 
 public class BookTest {
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void constructorThrowsErrorForNullTitle() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            Book book = new Book("Jonas", null, true);
-        });
+        Book book = new Book("Jonas", null, true);
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void constructorThrowsErrorForEmptyTitle() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            Book book = new Book("Jonas", "", true);
-        });
+        Book book = new Book("Jonas", "", true);
+
     }
 
     @Test
