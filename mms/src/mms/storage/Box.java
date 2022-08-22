@@ -28,7 +28,8 @@ public class Box extends Storage implements Packable {
      * @param comment the comment written on the box
      * @throws IllegalArgumentException if comment is null
      */
-    public Box(double width, double height, double length, String comment) {
+    public Box(double width, double height, double length, String comment)
+            throws IllegalArgumentException {
         super(width, height, length);
         if (comment == null) {
             throw new IllegalArgumentException();
@@ -45,7 +46,8 @@ public class Box extends Storage implements Packable {
      * @param comment the comment written on the box
      * @throws IllegalArgumentException if comment is null
      */
-    public Box(double width, double height, double length, Size size, String comment) {
+    public Box(double width, double height, double length, Size size, String comment)
+            throws IllegalArgumentException {
         super(width, height, length, size);
         if (comment == null) {
             throw new IllegalArgumentException();

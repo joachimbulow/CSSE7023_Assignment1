@@ -24,7 +24,7 @@ public class MovingTruck extends Storage {
      * @param length the length of the boc
      * @throws IllegalArgumentException when length is less than 1500
      */
-    public MovingTruck(double width, double height, double length) {
+    public MovingTruck(double width, double height, double length) throws IllegalArgumentException {
         super(width, height, length);
         if (length < 1500) {
             throw new IllegalArgumentException();
@@ -39,7 +39,8 @@ public class MovingTruck extends Storage {
      * @param length the length of the boc
      * @param size   size of the truck
      */
-    public MovingTruck(double width, double height, double length, Size size) {
+    public MovingTruck(double width, double height, double length, Size size)
+            throws IllegalArgumentException {
         super(width, height, length, size);
         if (length < 1500) {
             throw new IllegalArgumentException();

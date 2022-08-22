@@ -22,7 +22,7 @@ public class Book extends Personal {
      * @param isFiction whether the book is fiction or not
      * @throws IllegalArgumentException if title is null or empty
      */
-    public Book(String owner, String title, boolean isFiction) {
+    public Book(String owner, String title, boolean isFiction) throws IllegalArgumentException {
         super(owner, 20, 20, 5);
         if (title == null || title.isEmpty()) {
             throw new IllegalArgumentException();

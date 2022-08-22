@@ -33,7 +33,7 @@ public abstract class Personal implements Packable {
      * @param owner the owner of the item
      * @throws IllegalArgumentException if owner is null or empty
      */
-    public Personal(String owner) {
+    public Personal(String owner) throws IllegalArgumentException {
         if (owner == null || owner.isEmpty()) {
             throw new IllegalArgumentException();
         }
@@ -52,7 +52,8 @@ public abstract class Personal implements Packable {
      * @param length the length of the boc
      * @throws IllegalArgumentException if owner is null or empty
      */
-    public Personal(String owner, double width, double height, double length) {
+    public Personal(String owner, double width, double height, double length)
+            throws IllegalArgumentException {
         if (owner == null || owner.isEmpty() || width < 0 || height < 0 || length < 0) {
             throw new IllegalArgumentException();
         }

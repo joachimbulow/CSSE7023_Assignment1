@@ -48,7 +48,8 @@ public abstract class Storage {
      * @param length length of the bag
      * @throws IllegalArgumentException if any dimensions is 0 or negative
      */
-    public Storage(double width, double height, double length) {
+    public Storage(double width, double height, double length)
+            throws IllegalArgumentException {
         if (width <= 0 || height <= 0 || length <= 0) {
             throw new IllegalArgumentException();
         }
@@ -67,7 +68,8 @@ public abstract class Storage {
      * @param size the size of the storage container
      * @throws IllegalArgumentException if any dimensions is 0 or negative
      */
-    public Storage(double width, double height, double length, Size size) {
+    public Storage(double width, double height, double length, Size size)
+            throws IllegalArgumentException {
         if (width <= 0 || height <= 0 || length <= 0) {
             throw new IllegalArgumentException();
         }
