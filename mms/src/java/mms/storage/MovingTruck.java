@@ -2,11 +2,13 @@ package mms.storage;
 
 import mms.exceptions.BadItemException;
 import mms.exceptions.PackingException;
+import mms.exceptions.PackingOrderException;
 import mms.exceptions.StorageFullException;
 import mms.furniture.Furniture;
 import mms.utility.Packable;
 import mms.utility.Size;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,7 +19,8 @@ public class MovingTruck extends Storage {
 
     /**
      * Constructor with dimensions
-     * @param width the width of the box
+     *
+     * @param width  the width of the box
      * @param height the height of the box
      * @param length the length of the boc
      * @throws IllegalArgumentException when length is less than 1500
@@ -31,10 +34,11 @@ public class MovingTruck extends Storage {
 
     /**
      * Constructor with dimensions and size
-     * @param width the width of the box
+     *
+     * @param width  the width of the box
      * @param height the height of the box
      * @param length the length of the boc
-     * @param size size of the truck
+     * @param size   size of the truck
      */
     public MovingTruck(double width, double height, double length, Size size) {
         super(width, height, length, size);
@@ -55,7 +59,7 @@ public class MovingTruck extends Storage {
 
         // If any furniture is already packed, nothing other than furniture may be packed
         if (hasFurniture && !item.getClass().equals(Furniture.class)) {
-            throw new BadItemException();
+            throw new PackingOrderException();
         }
 
         double packedLength = getElements().stream()
@@ -67,21 +71,33 @@ public class MovingTruck extends Storage {
         super.pack(item);
     }
 
-    //TODO fix this
     @Override
     public Packable unpack() {
-        List<Packable> furniture = getElements().stream()
-                .filter(e -> e instanceof Furniture).collect(Collectors.toList());
-
-        if (furniture.size() > 0) {
-            return getElements().remove(getElements().indexOf(furniture.get(0)));
+        // Unpacking and repacking to conform to javadoc
+        List<Packable> unpackedItems = new ArrayList<>();
+        Packable unpackedItem = null;
+        while (getOccupiedCapacity() > 0) {
+            unpackedItems.add(super.unpack());
+        }
+        // Removing furniture FIFO
+        Packable firstFurniture = unpackedItems.stream()
+                .filter(p -> p instanceof Furniture).findFirst().orElse(null);
+        if (firstFurniture != null) {
+            unpackedItem = unpackedItems.remove(unpackedItems.indexOf(firstFurniture));
+        } else if (unpackedItems.size() != 0) {
+            // Else unpacking LIFO
+            unpackedItem = unpackedItems.remove(unpackedItems.size() - 1);
+        }
+        //Repacking remaining items
+        try {
+            for (Packable p : unpackedItems) {
+                super.pack(p);
+            }
+        } catch (Exception e) {
+            System.out.println("A packing error occurred");
         }
 
-        if (getElements().size() > 0) {
-            return getElements().remove(getElements().size() - 1);
-        }
-
-        return null;
+        return unpackedItem;
     }
 
     @Override
@@ -91,6 +107,7 @@ public class MovingTruck extends Storage {
 
     /**
      * Calculates volume of truck
+     *
      * @return the volume of truck
      */
     public double getVolume() {

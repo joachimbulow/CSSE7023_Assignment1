@@ -35,7 +35,7 @@ public class Furniture implements Packable {
 
     @Override
     public double getWidth() {
-        return type.width * 100 ;
+        return type.width * 100;
     }
 
     @Override

@@ -52,7 +52,8 @@ public class Bag extends Storage implements Packable {
             throw new BadItemException();
         }
 
-        List<Packable> personalElements = getElements().stream().filter(ele -> ele instanceof Personal).collect(Collectors.toList());
+        List<Packable> personalElements = getElements().stream()
+                .filter(ele -> ele instanceof Personal).collect(Collectors.toList());
         if (personalElements.size() * Personal.getBaseWeight() > 1500) {
             throw new StorageFullException();
         }

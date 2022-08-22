@@ -41,7 +41,8 @@ public class Book extends Personal {
 
     @Override
     public String toString() {
-        return "Book (" + getOwner() + ") Title: " + title + " (" + (isFiction ?  "Fiction" : "Non-Fiction" ) + ")";
+        return "Book (" + getOwner() + ") Title: "
+                + title + " (" + (isFiction ?  "Fiction" : "Non-Fiction") + ")";
     }
 
 

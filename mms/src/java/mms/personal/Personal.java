@@ -82,6 +82,10 @@ public abstract class Personal implements Packable {
         return owner;
     }
 
+    /**
+     * Getter for the base weigth of personal items
+     * @return base weight
+     */
     public static int getBaseWeight() {
         return 250;
     }
