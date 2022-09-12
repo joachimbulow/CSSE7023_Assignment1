@@ -16,6 +16,11 @@ import java.util.stream.Collectors;
 public class Bag extends Storage implements Packable {
 
     /**
+     * Capacity of the bag in terms of weight
+     */
+    private static final int weightCapacity = 1500;
+
+    /**
      * Constructor with dimensions
      * @param width width of the bag
      * @param height height of the bag
@@ -46,6 +51,7 @@ public class Bag extends Storage implements Packable {
      * Method for packing an item to the bag
      * @param item to pack
      * @throws BadItemException when packing non personal item
+     * @throws StorageFullException when weight capacity is exceeded
      */
     public void pack(Packable item) throws PackingException {
         if (!(item instanceof Personal)) {
@@ -54,7 +60,7 @@ public class Bag extends Storage implements Packable {
 
         List<Packable> personalElements = getElements().stream()
                 .filter(ele -> ele instanceof Personal).collect(Collectors.toList());
-        if (personalElements.size() * Personal.getBaseWeight() > 1500) {
+        if (personalElements.size() * Personal.getBaseWeight() > weightCapacity) {
             throw new StorageFullException();
         }
 

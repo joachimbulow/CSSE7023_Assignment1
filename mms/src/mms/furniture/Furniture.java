@@ -28,16 +28,28 @@ public class Furniture implements Packable {
         return type;
     }
 
+    /**
+     * Converts and returns value from meters to centimeters
+     * @return height in centimeters
+     */
     @Override
     public double getHeight() {
         return type.height * 100;
     }
 
+    /**
+     * Converts and returns value from meters to centimeters
+     * @return width in centimeters
+     */
     @Override
     public double getWidth() {
         return type.width * 100;
     }
 
+    /**
+     * Converts and returns value from meters to centimeters
+     * @return length in centimeters
+     */
     @Override
     public double getLength() {
         return type.length * 100;

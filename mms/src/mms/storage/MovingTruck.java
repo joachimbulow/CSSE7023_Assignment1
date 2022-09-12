@@ -17,16 +17,21 @@ import java.util.stream.Collectors;
 public class MovingTruck extends Storage {
 
     /**
+     * The size of the cab of the truck
+     */
+    private static final int cabSize = 1500;
+
+    /**
      * Constructor with dimensions
      *
      * @param width  the width of the box
      * @param height the height of the box
-     * @param length the length of the boc
-     * @throws IllegalArgumentException when length is less than 1500
+     * @param length the length of the box
+     * @throws IllegalArgumentException when length is less than size of the cab
      */
     public MovingTruck(double width, double height, double length) throws IllegalArgumentException {
-        super(width, height, length);
-        if (length < 1500) {
+        super(width, height, length, Size.LARGE);
+        if (length < cabSize) {
             throw new IllegalArgumentException();
         }
     }
@@ -42,7 +47,7 @@ public class MovingTruck extends Storage {
     public MovingTruck(double width, double height, double length, Size size)
             throws IllegalArgumentException {
         super(width, height, length, size);
-        if (length < 1500) {
+        if (length < cabSize) {
             throw new IllegalArgumentException();
         }
     }
@@ -102,7 +107,7 @@ public class MovingTruck extends Storage {
 
     @Override
     public double getLength() {
-        return super.getLength() - 1500;
+        return super.getLength() - cabSize;
     }
 
     /**

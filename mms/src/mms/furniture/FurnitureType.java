@@ -3,6 +3,7 @@ package mms.furniture;
 
 /**
  * Enum to define type of furniture
+ * All dimensions are specified in meters
  */
 public enum FurnitureType {
 

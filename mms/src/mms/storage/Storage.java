@@ -218,7 +218,7 @@ public abstract class Storage {
     }
 
     /**
-     * Print the storage container and its content at the given level of indentation
+     * Prints the storage container and its content at the given level of indentation
      * Is used recursively to pretty print with indentation
      * @param level the level of indentation
      * @return a human readable print of the storage container

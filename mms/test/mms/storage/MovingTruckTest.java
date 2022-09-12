@@ -36,6 +36,12 @@ public class MovingTruckTest {
         }
     }
 
+    @Test
+    public void defaultConstructorCreatesLargeTruck() {
+        MovingTruck mt = new MovingTruck(3000, 3000, 3000);
+        assertEquals(mt.getSize(), Size.LARGE);
+    }
+
     @Test(expected = StorageFullException.class)
     public void packThrowsStorageFullExceptionForExceedingDimension() throws PackingException {
         MovingTruck mt = new MovingTruck(1000, 1000, 1500, Size.SMALL);
